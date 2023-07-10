@@ -1,0 +1,173 @@
+@import '../../styles/variablesAndMixins.scss';
+
+.chapterHeader {
+  @include chapterHeader;
+}
+
+.chapterHeaderHolder {
+  @include chapterHeaderHolder;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  .chapterHeaderHolder {
+    align-self: flex-start;
+  }
+  a {
+    align-self: center;
+  }
+}
+
+.main > img {
+  width: 100%;
+}
+
+.btn {
+  @include btn;
+}
+
+.main {
+  @include main;
+}
+
+.darkSection {
+  @include darkSection;
+}
+
+.smallHolder {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 50%;
+    padding: 10px;
+
+    h5 {
+      margin: 5px 0;
+      padding: 10px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.main {
+  @include main;
+}
+
+.darkSection {
+  @include darkSection;
+}
+
+@media (max-width: 750px) {
+  .smallHolder {
+    flex-wrap: wrap;
+  }
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.rectangleHolder {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 70%;
+}
+
+.bigRectangleHolder {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.rectangle {
+  --g: var(--c, white) calc(49.5% - 1px), #000 1px, #000 49.5%, transparent 50%;
+  background: linear-gradient(to top right, var(--g)) top right,
+    linear-gradient(to top left, var(--g)) top left,
+    linear-gradient(to bottom right, var(--g)) bottom right,
+    linear-gradient(to bottom left, var(--g)) bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  height: 260px;
+  width: 100%;
+  display: inline-block;
+  margin: -35px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s;
+  padding: 0;
+  padding-top: 50px;
+  cursor: pointer;
+}
+
+.secondRectangle {
+  padding-top: 70px;
+}
+.rectangle > h2 {
+  margin: 0;
+}
+
+.rectangle:hover {
+  transition: all 1s;
+  padding-top: 0px;
+}
+
+.rectangle:hover > .rectangleList {
+  visibility: visible;
+  opacity: 1;
+}
+
+.rectangleList {
+  visibility: hidden;
+  opacity: 0;
+  margin: 0;
+  font-size: 12px;
+  transition: visibility 0s, opacity 0.5s linear;
+}
+
+.main button {
+  margin-top: 50px;
+}
+
+@media (max-width: 650px) {
+  .rectangle {
+    background: none;
+    background-color: white;
+    margin: 0;
+    transition: none;
+    border: 1px solid gray;
+    padding: 10px;
+    margin: 10px;
+    height: 100%;
+  }
+  .rectangle:hover {
+    padding: 10px;
+  }
+  .rectangleList {
+    visibility: visible;
+    opacity: 1;
+    font-size: 18px;
+  }
+  .bigRectangleHolder {
+    display: flex;
+    flex-direction: column;
+  }
+  .rectangleHolder {
+    width: 90%;
+  }
+}

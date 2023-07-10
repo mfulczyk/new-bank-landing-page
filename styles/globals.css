@@ -1,0 +1,124 @@
+@font-face {
+  font-family: 'mbankbold';
+  src: url('mbank-bold-webfont.woff2') format('woff2'),
+    url('mbank-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  color-scheme: only light;
+}
+
+@font-face {
+  font-family: 'mbankregular';
+  src: url('mbank-regular-webfont.woff2') format('woff2'),
+    url('mbank-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'mbankregular', sans-serif;
+  line-height: 1.4;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+p {
+  font-size: 20px;
+}
+
+b {
+  font-size: 22px;
+  font-weight: mbankbold;
+}
+
+h5 {
+  font-family: mbankbold;
+  font-size: 22px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+@media (max-width: 768px) {
+  h5 {
+    font-size: 18px;
+  }
+  p,
+  b {
+    font-size: 16px;
+  }
+}
+
+.control-prev::before {
+  border-bottom: 5px solid #860100 !important;
+  border-right: 5px solid #860100 !important;
+  border-top: none !important;
+  border-left: none !important;
+  transform: rotate(135deg);
+  height: 20px;
+  width: 20px;
+}
+
+.control-next::before {
+  border-bottom: 5px solid white !important;
+  border-right: 5px solid white !important;
+  border-top: none !important;
+  border-left: none !important;
+  transform: rotate(-45deg);
+  height: 20px;
+  width: 20px;
+}
+
+@media (max-width: 1050px) {
+  .control-next::before {
+    border-bottom: 5px solid #860100 !important;
+    border-right: 5px solid #860100 !important;
+    border-top: none !important;
+    border-left: none !important;
+    transform: rotate(-45deg);
+    height: 20px;
+    width: 20px;
+  }
+}
+
+.grid {
+  margin: 0 auto;
+  top: 70px;
+}
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.grid-sizer,
+.grid-item {
+  width: 33.33%;
+  padding: 8px;
+}
+/* 2 columns wide */
+.grid-item--width2 {
+  width: 66.66%;
+}
+
+@media (max-width: 751px) {
+  .grid-item--width2 {
+    width: 100%;
+  }
+  .grid-sizer,
+  .grid-item {
+    width: 100%;
+  }
+}

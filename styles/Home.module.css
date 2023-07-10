@@ -1,0 +1,53 @@
+.main {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'mbankregular', Helvetica;
+}
+
+@media (max-width: 1200px) {
+  .main {
+    padding: 0 10px;
+  }
+}
+
+.footer {
+  height: 150px;
+  width: 100%;
+  background-color: #f7f7f7;
+}
+
+.footerLogoAndCookies {
+  margin: 0 auto;
+  height: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerLogoAndCookies div a {
+  padding: 20px;
+  padding-right: 0;
+}
+.footerLogoAndCookies div a:hover {
+  transition: 0.5s color;
+  color: #e90a09;
+}
+
+@media (max-width: 470px) {
+  .footerLogoAndCookies {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .footerLogoAndCookies img {
+    margin-bottom: 20px;
+    
+  }
+}
+
+.cookiesDeclaration {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 80px;
+}

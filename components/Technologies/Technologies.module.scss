@@ -1,0 +1,47 @@
+@import '../../styles/variablesAndMixins.scss';
+
+.technologiesHolder img {
+  width: 100%;
+}
+.chapterHeader {
+  @include chapterHeader;
+}
+
+.chapterHeaderHolder {
+  @include chapterHeaderHolder;
+}
+
+.main {
+  @include main;
+}
+
+.technologyDescription > b {
+  font-family: mbankbold;
+}
+
+.darkSection {
+  @include darkSection;
+}
+
+.technologiesHolder {
+  padding-bottom: 30px;
+}
+
+.smallImgTechnology {
+  display: none;
+}
+
+@media (max-width: 1050px) {
+  .imgTechnology {
+    display: none;
+  }
+  .smallImgTechnology {
+    display: block;
+  }
+  .main div p {
+    font-size: 20px;
+  }
+  .main div p b {
+    font-size: 20px;
+  }
+}

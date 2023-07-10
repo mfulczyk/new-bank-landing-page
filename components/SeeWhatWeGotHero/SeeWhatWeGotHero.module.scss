@@ -1,0 +1,18 @@
+@import '../../styles/variablesAndMixins.scss';
+
+.hero {
+  height: 100%;
+  width: 100%;
+  font-family: mbankbold;
+  background-color: #f1f1f1;
+  padding-bottom: 80px;
+  padding-top: 20px;
+}
+
+.itKampusHeader {
+  @include itKampusHeader;
+}
+
+.main {
+  @include main;
+}

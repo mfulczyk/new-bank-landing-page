@@ -1,0 +1,197 @@
+@import '../../styles/variablesAndMixins.scss';
+
+.hero {
+  height: 100%;
+  width: 100%;
+  font-family: mbankbold;
+  z-index: 1;
+}
+
+.video {
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  height: 700px;
+  object-fit: cover;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.817);
+}
+
+.heroArticle {
+  padding-top: 300px;
+  display: flex;
+  font-family: mbankregular;
+  position: relative;
+}
+
+.heroArticle div {
+  width: 80%;
+}
+
+.heroArticle img {
+  width: 40%;
+  object-fit: contain;
+  margin-top: -210px;
+}
+
+.heroArticle::after {
+  content: '';
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  background-image: url('../../public/cogBigAnimation.png');
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 11%;
+  bottom: 30%;
+  animation: spinBig 20s linear infinite;
+}
+.heroArticle::before {
+  content: '';
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  background-image: url('../../public/cogSmallAnimation.png');
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  right: 20%;
+  bottom: 29%;
+  animation: spinSmall 15s linear infinite;
+}
+
+@keyframes spinBig {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinSmall {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.headersHolder {
+  padding-top: 20px;
+  color: white;
+}
+
+.headersHolder h1 {
+  font-size: 115px;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+.headersHolder h1 span {
+  font-size: 115px;
+  margin-bottom: 0;
+  color: #e90a09;
+}
+
+.headersHolder h3 {
+  font-size: 32px;
+  margin-top: -20px;
+  padding-top: 0;
+}
+
+.headersHolder h4 {
+  font-size: 30px;
+  margin-top: 0;
+  padding-top: 0;
+  font-family: mbankregular;
+}
+
+.btn {
+  @include btn;
+}
+
+.btnMitCzyHit {
+  margin-top: 20px;
+  margin-bottom: 90px;
+}
+
+@media (max-width: 950px) {
+  .heroArticle {
+    padding-top: 150px;
+    flex-wrap: wrap-reverse;
+  }
+
+  .heroArticle img {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+  .heroArticle div {
+    width: 100%;
+  }
+
+  .heroArticle::after {
+    right: 41%;
+    bottom: 46%;
+  }
+  .heroArticle::before {
+    right: 52%;
+    bottom: 46%;
+  }
+}
+
+@media (max-width: 470px) {
+  .headersHolder h1 {
+    font-size: 90px;
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+
+  .headersHolder h1 span {
+    font-size: 90px;
+    margin-bottom: 0;
+    color: #e90a09;
+  }
+}
+
+.main {
+  @include main;
+}
+
+.imageDesktop {
+  display: none;
+}
+
+@media (max-width: 850px) {
+  .imageMobile {
+    display: none;
+  }
+
+  .imageDesktop {
+    display: block;
+  }
+  .heroArticle::after {
+    display: none;
+  }
+  .heroArticle::before {
+    display: none;
+  }
+}
+
+.videoMobile {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .video {
+    display: none;
+  }
+  .videoMobile {
+    display: block;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    height: 700px;
+    object-fit: cover;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.605);
+  }
+}

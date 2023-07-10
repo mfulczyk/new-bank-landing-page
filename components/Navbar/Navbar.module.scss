@@ -1,0 +1,190 @@
+@import '../../styles/variablesAndMixins.scss';
+
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  position: fixed;
+  color: white;
+  z-index: 500;
+  height: 70px;
+  font-family: mbankbold;
+  left: 50%;
+  max-width: 1000px;
+  font-size: 12px;
+  transform: translate(-50%, 0);
+
+  * {
+    width: 150px;
+    text-align: center;
+  }
+  :last-child {
+    width: 100px;
+  }
+}
+
+.navBar *:hover {
+  transition: 0.5s color;
+  color: #e90a09;
+}
+
+.mchLink:hover {
+  transition: 0.5s color;
+  color: #e90a09;
+  span {
+    color: white;
+  }
+}
+
+.btn:hover {
+  color: white;
+}
+.darkBackground::after {
+  backdrop-filter: blur(4px);
+  content: '';
+  left: 0;
+  top: 0;
+  display: block;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  position: fixed;
+  width: 100vw;
+  height: 70px;
+  z-index: 100;
+}
+
+.btn {
+  @include btn;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.navItem {
+  cursor: pointer;
+}
+
+.navBarMobile {
+  display: none;
+}
+
+.navBarMobileHolder {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .darkBackground::after {
+    background-color: rgba($color: #000000, $alpha: 0.3);
+  }
+
+  .navBar {
+    display: none;
+  }
+  .navBarMobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: space-between;
+    font-size: 14px;
+    position: fixed;
+    left: 0;
+    color: white;
+    z-index: 500;
+    height: 57px;
+    width: 100%;
+    font-family: mbankbold;
+    font-size: 12px;
+  }
+
+  .navBarMobileHolder {
+    display: block;
+    z-index: 500;
+    font-family: mbankbold;
+    position: fixed;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px);
+    top: 70px;
+    left: 0;
+    margin: 0;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    li {
+      padding: 10px;
+    }
+  }
+}
+.burgerIcon {
+  height: 100%;
+  width: 57px;
+  background-image: url('../../public/burgerIcon.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+}
+
+.main {
+  @include main;
+}
+
+.untoggled {
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 11px;
+  height: 100%;
+  width: 57px;
+}
+.untoggled:before,
+.untoggled:after,
+.untoggled div {
+  background: #fff;
+  content: '';
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  margin: 7px 0;
+  transition: 0.5s;
+}
+
+.toggled {
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 11px;
+  height: 100%;
+  width: 57px;
+}
+
+.toggled:before,
+.toggled:after,
+.toggled div {
+  background: #fff;
+  content: '';
+  display: block;
+  height: 3px;
+  border-radius: 3px;
+  margin: 7px 0;
+  transition: 0.5s;
+}
+
+.toggled:before {
+  transform: translateY(10px) rotate(135deg);
+}
+.toggled:after {
+  transform: translateY(-12px) rotate(-135deg);
+}
+.toggled div,
+.toggled div {
+  transform: scale(0);
+}
+
+.active {
+  color: #e90a09;
+}
+
+.activeMCH {
+  color: #e90a09;
+  span {
+    color: white;
+  }
+}

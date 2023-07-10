@@ -1,0 +1,102 @@
+@mixin chapterHeader {
+  font-size: 58px;
+  margin-left: 30px;
+  font-weight: 600;
+  @media (max-width: 500px) {
+    font-size: 35px;
+    margin-left: 15px;
+  }
+}
+
+@mixin chapterHeaderHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: center;
+  font-family: mbankbold;
+  img {
+    align-self: center;
+    width: 100px;
+    height: 100px;
+    @media (max-width: 500px) {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+@mixin btn {
+  padding: 12px 32px;
+  border: none;
+  color: white;
+  background-color: #860100;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 20px;
+  font-family: mbankbold;
+  &:hover {
+    background-color: #550b0b;
+    transition: 0.5s background-color;
+  }
+}
+
+@mixin main {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@mixin darkSection {
+  background-color: #f7f7f7;
+  padding: 5px;
+}
+
+@mixin itKampusHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: mbankregular;
+  margin-bottom: 30px;
+  & > h2 {
+    font-family: mbankbold;
+    font-size: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0;
+  }
+
+  > p {
+    margin-top: 0;
+    padding-left: 50px;
+    font-size: 25px;
+  }
+
+  & > h2::before {
+    content: '';
+    left: -30px;
+    bottom: 13px;
+    position: absolute;
+    background-color: #e90a09;
+    display: block;
+    height: 17px;
+    width: 17px;
+  }
+  @media (max-width: 1065px) {
+    margin-left: 40px;
+  }
+  @media (max-width: 400px) {
+    > p {
+      padding-left: 20px;
+      font-size: 20px;
+    }
+
+    & > h2 {
+      font-size: 30px;
+    }
+  }
+}

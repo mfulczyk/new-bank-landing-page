@@ -1,0 +1,64 @@
+@import '../../styles/variablesAndMixins.scss';
+
+.chapterHeader {
+  @include chapterHeader;
+}
+
+.chapterHeaderHolder {
+  @include chapterHeaderHolder;
+}
+
+.smallHolder {
+  display: flex;
+  flex-direction: row;
+}
+.main {
+  @include main;
+}
+
+@media (max-width: 800px) {
+  .smallHolder {
+    flex-wrap: wrap;
+  }
+}
+
+.recrutationIcon {
+  position: relative;
+  padding: 10px;
+  width: 50%;
+}
+
+.recrutationIcon p {
+  font-size: 16px;
+}
+
+.recrutationIcon::after {
+  top: 30px;
+  left: 155px;
+  content: '';
+  display: block;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  background-image: url('/arrowBlack.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.recrutationIcon:last-child::after {
+  display: none;
+}
+
+@media (max-width: 450px) {
+  .recrutationIcon::after {
+    display: none;
+  }
+
+  .recrutationIcon h5 {
+    font-size: 16px;
+  }
+  .recrutationIcon p {
+    font-size: 14px;
+  }
+}

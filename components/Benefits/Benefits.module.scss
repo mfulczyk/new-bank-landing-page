@@ -1,0 +1,72 @@
+@import '../../styles/variablesAndMixins.scss';
+
+.chapterHeader {
+  @include chapterHeader;
+}
+
+.chapterHeaderHolder {
+  @include chapterHeaderHolder;
+}
+
+.smallHolder {
+  display: flex;
+  flex-direction: row;
+  // div:nth-child(2) h5 {
+  //   height: 90px;
+  // }
+
+  div {
+    width: 50%;
+    padding: 10px;
+    h5 {
+      font-size: 19px;
+      height: 60px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+}
+
+.headerIcon {
+  height: 60px;
+}
+
+.main {
+  @include main;
+}
+
+.darkSection {
+  @include darkSection;
+}
+
+.main h4 {
+  margin-left: 135px;
+  margin-top: -20px;
+  margin-bottom: 80px;
+  font-family: 'mbankbold';
+  font-size: 22px;
+}
+
+@media (max-width: 750px) {
+  .smallHolder {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 500px) {
+  .main > h4 {
+    margin-left: 69px;
+  }
+  .smallHolder {
+    div {
+      h5 {
+        font-size: 16px;
+        height: 60px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
