@@ -1,7 +1,7 @@
-@import '../../styles/variablesAndMixins.scss';
+@import "../../styles/variablesAndMixins.scss";
 
 .hero {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   font-family: mbankbold;
   z-index: 1;
@@ -11,7 +11,7 @@
   position: absolute;
   left: 0;
   z-index: -1;
-  height: 700px;
+  height: 100vh;
   object-fit: cover;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.817);
@@ -35,11 +35,11 @@
 }
 
 .heroArticle::after {
-  content: '';
+  content: "";
   display: inline-block;
   height: 100px;
   width: 100px;
-  background-image: url('../../public/cogBigAnimation.png');
+  background-image: url("../../public/cogBigAnimation.png");
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -49,11 +49,11 @@
   animation: spinBig 20s linear infinite;
 }
 .heroArticle::before {
-  content: '';
+  content: "";
   display: inline-block;
   height: 50px;
   width: 50px;
-  background-image: url('../../public/cogSmallAnimation.png');
+  background-image: url("../../public/cogSmallAnimation.png");
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -76,6 +76,13 @@
 
 .headersHolder {
   padding-top: 20px;
+  // padding-bottom: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  height: 100%;
   color: white;
 }
 
@@ -92,7 +99,8 @@
 }
 
 .headersHolder h3 {
-  font-size: 32px;
+  font-size: 65px;
+  line-height: 70px;
   margin-top: -20px;
   padding-top: 0;
 }
@@ -104,8 +112,24 @@
   font-family: mbankregular;
 }
 
+.chevron::before {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-color: #bfbfbf;
+  border-width: 2px 2px 0 0;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  left: 50%;
+  bottom: 30px;
+  transform: rotate(135deg);
+  vertical-align: top;
+}
+
 .btn {
   @include btn;
+  padding: 12px 60px !important;
 }
 
 .btnMitCzyHit {
@@ -154,6 +178,7 @@
 
 .main {
   @include main;
+  height: 100vh;
 }
 
 .imageDesktop {

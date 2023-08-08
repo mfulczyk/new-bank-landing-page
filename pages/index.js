@@ -22,10 +22,10 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>wITaj w mBanku!</title>
+        <title>Kariera w mBanku!</title>
         <meta
           name="description"
-          content="wITaj w mBanku! W jednym z czołowych polskich software house’ów"
+          content="Kariera w mBanku. W jednym z czołowych polskich software house’ów"
         />
         <link rel="icon" href="/favicon.ico" />
 
@@ -59,7 +59,6 @@ export default function Home() {
           <Navbar />
           <Hero />
           <Technologies />
-          <Agile />
           <ITStructure />
         </main>
       </>

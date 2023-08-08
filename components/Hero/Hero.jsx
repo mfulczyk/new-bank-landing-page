@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from './Hero.module.scss';
-import classNames from 'classnames';
-import Link from 'next/link';
+import React from "react";
+import styles from "./Hero.module.scss";
+import classNames from "classnames";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -36,24 +36,19 @@ const Hero = () => {
           }}
         ></div>
 
-        <div
-          className={classNames(styles.headersHolder)}
-          style={{ paddingBottom: '190px' }}
-        >
-          <h1>
-            w<span>IT</span>aj
-          </h1>
-          <h3>w mBanku!</h3>
+        <div className={classNames(styles.headersHolder)}>
+          <h3>
+            weź udział <br /> w zabawie
+          </h3>
           <h4>
-            w jednym z czołowych <br />
-            polskich software house’ów
+            - dokonuj wyboru i poznaj <br /> wartości mBanku!
           </h4>
           <Link passHref href="/experts">
-            <button className={classNames(styles.btn)}>
-              dowiedz się więcej
-            </button>
+            <button className={classNames(styles.btn)}>odtwórz film</button>
           </Link>
         </div>
+
+        <div className={classNames(styles.chevron)} />
       </div>
     </section>
   );
