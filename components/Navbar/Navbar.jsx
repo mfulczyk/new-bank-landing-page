@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import classNames from 'classnames';
-import styles from './Navbar.module.scss';
-import { Link as ScrollLink } from 'react-scroll';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import React, { useState } from "react";
+import classNames from "classnames";
+import styles from "./Navbar.module.scss";
+import { Link as ScrollLink } from "react-scroll";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [isMobileNavbar, setIsMobileNavbar] = useState(false);
@@ -18,106 +18,21 @@ const Navbar = () => {
               height="50px"
               width="100%"
               style={{
-                objectFit: 'cover',
-                marginRight: '15px',
-                cursor: 'pointer',
+                objectFit: "cover",
+                marginRight: "15px",
+                cursor: "pointer",
               }}
               alt=""
               src="/mbank-logo.jpeg"
-            />
+            /> 
           </Link>
-          <Link passHref href="/">
-            <ScrollLink className={classNames(styles.navItem)} to="Hero">
-              wITaj <br />w mBanku!
-            </ScrollLink>
-          </Link>
-          <Link passHref href="/#JobOffers">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="JobOffers"
-            >
-              oferty <br />
-              pracy
-            </ScrollLink>
-          </Link>
-          <Link passHref href="/#Technologies">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="Technologies"
-            >
-              technologie
-            </ScrollLink>
-          </Link>
-          <Link passHref href="/#Agile">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="Agile"
-            >
-              Agile
-            </ScrollLink>
-          </Link>
-          <Link passHref href="/#ITStructure">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="ITStructure"
-            >
-              struktura
-            </ScrollLink>
-          </Link>
-          <Link passHref href="/experts">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="ExpertsHero"
-            >
-              blog eksperci
-            </ScrollLink>
-          </Link>{' '}
-          <Link passHref href="/kampus-it">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="KampusIT"
-            >
-              kampus IT
-            </ScrollLink>
-          </Link>
-          <Link passHref href="/#RecrutationProcess">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="RecrutationProcess"
-            >
-              proces rekrutacji
-            </ScrollLink>
-          </Link>
-          <Link passHref href="/#Benefits">
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to="Benefits"
-            >
-              bonusy
-            </ScrollLink>
-          </Link>
+
           <Link
             passHref
             href={
-              router.route === '/kampus-it'
-                ? `${'/kampus-it/#ChooseYourTeam'}`
-                : `${'/#JobOffers'}`
+              router.route === "/kampus-it"
+                ? `${"/kampus-it/#ChooseYourTeam"}`
+                : `${"/#JobOffers"}`
             }
           >
             <ScrollLink
@@ -125,9 +40,9 @@ const Navbar = () => {
               activeClass={classNames(styles.active)}
               className={classNames(styles.navItem)}
               to={
-                router.route === '/kampus-it'
-                  ? `${'/kampus-it/#ChooseYourTeam'}`
-                  : `${'JobOffers'}`
+                router.route === "/kampus-it"
+                  ? `${"/kampus-it/#ChooseYourTeam"}`
+                  : `${"JobOffers"}`
               }
             >
               <button className={classNames(styles.btn)}>aplikuj</button>
@@ -140,9 +55,9 @@ const Navbar = () => {
               onClick={() => setIsMobileNavbar(!isMobileNavbar)}
               height="50px"
               style={{
-                objectFit: 'cover',
-                marginTop: '10px',
-                marginLeft: '10px',
+                objectFit: "cover",
+                marginTop: "10px",
+                marginLeft: "10px",
               }}
               alt=""
               src="/mbank-logo.jpeg"
@@ -216,9 +131,9 @@ const Navbar = () => {
             <Link
               passHref
               href={
-                router.route === '/kampus-it'
-                  ? `${'/kampus-it/#ChooseYourTeam'}`
-                  : `${'/#JobOffers'}`
+                router.route === "/kampus-it"
+                  ? `${"/kampus-it/#ChooseYourTeam"}`
+                  : `${"/#JobOffers"}`
               }
             >
               <button className={classNames(styles.btn)}>aplikuj</button>

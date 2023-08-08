@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/next-script-for-ga */
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import Navbar from '../components/Navbar/Navbar';
-import Hero from '../components/Hero/Hero';
-import Technologies from '../components/Technologies/Technologies';
-import Agile from '../components/Agile/Agile';
-import ITStructure from '../components/ITStructure/ITStructure';
-import EmployeeReview from '../components/EmployeeReview/EmployeeReview';
-import Benefits from '../components/Benefits/Benefits';
-import RecrutationProcess from '../components/RecrutationProcess/RecrutationProcess';
-import JobOffers from '../components/JobOffers/JobOffers';
-import JobOffersFromCms from '../components/JobOffers/JobOffersFromCms';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import Navbar from "../components/Navbar/Navbar";
+import Hero from "../components/Hero/Hero";
+import Technologies from "../components/Technologies/Technologies";
+import Agile from "../components/Agile/Agile";
+import ITStructure from "../components/ITStructure/ITStructure";
+import EmployeeReview from "../components/EmployeeReview/EmployeeReview";
+import Benefits from "../components/Benefits/Benefits";
+import RecrutationProcess from "../components/RecrutationProcess/RecrutationProcess";
+import JobOffers from "../components/JobOffers/JobOffers";
+import JobOffersFromCms from "../components/JobOffers/JobOffersFromCms";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const router = useRouter();
@@ -52,19 +52,15 @@ export default function Home() {
             src="https://www.googletagmanager.com/ns.html?id=GTM-TPQ59RN"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
         <main className={styles.main}>
           <Navbar />
           <Hero />
-          <JobOffersFromCms />
           <Technologies />
           <Agile />
           <ITStructure />
-          <EmployeeReview />
-          <RecrutationProcess />
-          <Benefits />
         </main>
       </>
       <footer className={styles.footer}>

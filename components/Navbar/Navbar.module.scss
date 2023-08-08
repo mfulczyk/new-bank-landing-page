@@ -1,4 +1,4 @@
-@import '../../styles/variablesAndMixins.scss';
+@import "../../styles/variablesAndMixins.scss";
 
 .navBar {
   display: flex;
@@ -11,6 +11,7 @@
   height: 70px;
   font-family: mbankbold;
   left: 50%;
+  width: 100%;
   max-width: 1000px;
   font-size: 12px;
   transform: translate(-50%, 0);
@@ -42,7 +43,7 @@
 }
 .darkBackground::after {
   backdrop-filter: blur(4px);
-  content: '';
+  content: "";
   left: 0;
   top: 0;
   display: block;
@@ -118,7 +119,7 @@
 .burgerIcon {
   height: 100%;
   width: 57px;
-  background-image: url('../../public/burgerIcon.svg');
+  background-image: url("../../public/burgerIcon.svg");
   background-repeat: no-repeat;
   background-position: center;
   border: none;
@@ -139,7 +140,7 @@
 .untoggled:after,
 .untoggled div {
   background: #fff;
-  content: '';
+  content: "";
   display: block;
   height: 3px;
   border-radius: 3px;
@@ -159,7 +160,7 @@
 .toggled:after,
 .toggled div {
   background: #fff;
-  content: '';
+  content: "";
   display: block;
   height: 3px;
   border-radius: 3px;
