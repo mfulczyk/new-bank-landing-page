@@ -75,7 +75,10 @@ export default function Home() {
             <a passhref="true" href="javascript:mbiscuit.open()">
               Ustawienia cookie
             </a>
-            <a href="https://www.mbank.pl/o-nas/o-mbanku/polityka-prywatnosci.html">
+            <a
+              style={{ textAlign: "middle" }}
+              href="https://www.mbank.pl/o-nas/o-mbanku/polityka-prywatnosci.html"
+            >
               Polityka prywatności
             </a>
           </div>

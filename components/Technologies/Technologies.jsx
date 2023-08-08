@@ -33,10 +33,11 @@ const Technologies = () => {
   return (
     <section
       id="Technologies"
+      style={{ backgroundColor: "red !important" }}
       className={classNames(styles.technologiesHolder, styles.darkSection)}
     >
       <div className={classNames(styles.main)}>
-        <div style={{ width: "500px", height: "500px" }}></div>
+        <div style={{ width: "100%", height: "500px" }}></div>
       </div>
     </section>
   );

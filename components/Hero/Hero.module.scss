@@ -206,6 +206,9 @@
 }
 
 @media (max-width: 720px) {
+  .headersHolder h3 {
+    font-size: 50px;
+  }
   .video {
     display: none;
   }
@@ -214,7 +217,7 @@
     position: absolute;
     left: 0;
     z-index: -1;
-    height: 700px;
+    height: 100vh;
     object-fit: cover;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.605);
