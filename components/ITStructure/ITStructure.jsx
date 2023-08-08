@@ -43,6 +43,8 @@ const ITStructure = () => {
           <h2 className={classNames(styles.chapterHeader)}>nasze wartości</h2>
         </div>
 
+        <img style={{ width: "100%" }} src="/wartosci.svg" />
+
         <a passhref="true" href="/#JobOffers">
           <button
             style={{ marginBottom: "40px" }}
