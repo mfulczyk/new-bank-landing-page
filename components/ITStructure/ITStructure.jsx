@@ -40,15 +40,25 @@ const ITStructure = () => {
           id="structureHeader"
           className={classNames(styles.chapterHeaderHolder)}
         >
-          <h2 className={classNames(styles.chapterHeader)}>nasze wartości</h2>
+          <h2
+            aria-label="nasze wartości"
+            className={classNames(styles.chapterHeader)}
+          >
+            nasze wartości
+          </h2>
         </div>
 
-        <img style={{ width: "100%" }} src="/wartosci.svg" />
+        <img
+          style={{ width: "100%" }}
+          src="/wartosci.svg"
+          alt="Nasze wartości to autentyczność, empatia, odwaga, odpowiedzialność i współpraca."
+        />
 
         <a passhref="true" href="/#JobOffers">
           <button
             style={{ marginBottom: "40px" }}
             className={classNames(styles.btn)}
+            aria-label="aplikuj"
           >
             aplikuj
           </button>

@@ -25,7 +25,7 @@ export default function Home() {
         <title>Kariera w mBanku!</title>
         <meta
           name="description"
-          content="Kariera w mBanku. W jednym z czołowych polskich software house’ów"
+          content="Kariera w mBanku. Weź udział w zabawie - dokonuj wyboru i poznaj wartości mBanku!"
         />
         <link rel="icon" href="/favicon.ico" />
 
@@ -72,10 +72,15 @@ export default function Home() {
             />
           </a>
           <div>
-            <a passhref="true" href="javascript:mbiscuit.open()">
+            <a
+              aria-label="ustawienia cookie"
+              passhref="true"
+              href="javascript:mbiscuit.open()"
+            >
               Ustawienia cookie
             </a>
             <a
+              aria-label="ustawienia cookie"
               style={{ textAlign: "middle" }}
               href="https://www.mbank.pl/o-nas/o-mbanku/polityka-prywatnosci.html"
             >

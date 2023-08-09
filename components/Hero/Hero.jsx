@@ -15,6 +15,7 @@ const Hero = () => {
           muted
           autoplay
           playsinline
+          alt="film mBank - Weź udział w zabawie"
           src="hero-movie-test.mp4"
           class="${classNames(styles.video)}"
         />,
@@ -29,6 +30,7 @@ const Hero = () => {
           muted
           autoplay
           playsinline
+          alt="film mBank - Weź udział w zabawie"
           src="hero-movie-test-mobile.mp4"
           class="${classNames(styles.videoMobile)}"
         />,
@@ -37,14 +39,16 @@ const Hero = () => {
         ></div>
 
         <div className={classNames(styles.headersHolder)}>
-          <h3>
+          <h3 aria-label="Weź udział w zabawie">
             weź udział <br /> w zabawie
           </h3>
-          <h4>
+          <h4 aria-label="dokonuj wyboru i poznaj wartości mBanku!">
             - dokonuj wyboru i poznaj <br /> wartości mBanku!
           </h4>
           <Link passHref href="/experts">
-            <button className={classNames(styles.btn)}>odtwórz film</button>
+            <button className={classNames(styles.btn)} aria-label="otwórz film">
+              odtwórz film
+            </button>
           </Link>
         </div>
 

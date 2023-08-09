@@ -22,9 +22,9 @@ const Navbar = () => {
                 marginRight: "15px",
                 cursor: "pointer",
               }}
-              alt=""
+              alt="mbank logo"
               src="/mbank-logo.jpeg"
-            /> 
+            />
           </Link>
 
           <Link
@@ -45,7 +45,9 @@ const Navbar = () => {
                   : `${"JobOffers"}`
               }
             >
-              <button className={classNames(styles.btn)}>aplikuj</button>
+              <button aria-label="aplikuj" className={classNames(styles.btn)}>
+                aplikuj
+              </button>
             </ScrollLink>
           </Link>
         </nav>
@@ -82,53 +84,14 @@ const Navbar = () => {
           className={classNames(styles.navBarMobileHolder)}
         >
           <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link href="/#Hero">wITaj w mBanku!</Link>
-          </li>
-
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/#JobOffers">
-              oferty pracy
-            </Link>
-          </li>
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/#Technologies">
-              technologie
-            </Link>
-          </li>
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/#Agile">
-              Agile
-            </Link>
-          </li>
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/#ITStructure">
-              struktura
-            </Link>
-          </li>
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/experts">
-              blog eksperci
+            <Link aria-label="Kariera w mBanku" href="/#Hero">
+              Kariera w mBanku!
             </Link>
           </li>
 
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/kampus-it">
-              kampus IT
-            </Link>
-          </li>
-
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/#RecrutationProcess">
-              proces rekrutacji
-            </Link>
-          </li>
-          <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <Link passHref href="/#Benefits">
-              bonusy
-            </Link>
-          </li>
           <li onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
             <Link
+              aria-label="aplikuj"
               passHref
               href={
                 router.route === "/kampus-it"
