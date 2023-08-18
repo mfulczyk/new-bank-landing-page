@@ -16,7 +16,7 @@ const Navbar = () => {
           <Link passHref href="/#Hero">
             <img
               height="50px"
-              width="100%"
+              width="133px"
               style={{
                 objectFit: "cover",
                 marginRight: "15px",
@@ -65,17 +65,37 @@ const Navbar = () => {
               src="/mbank-logo.jpeg"
             />
           </Link>
-          <div onClick={() => setIsMobileNavbar(!isMobileNavbar)}>
-            <div
-              className={
-                !isMobileNavbar
-                  ? classNames(styles.untoggled)
-                  : classNames(styles.toggled)
+
+          <Link
+            passHref
+            href={
+              router.route === "/kampus-it"
+                ? `${"/kampus-it/#ChooseYourTeam"}`
+                : `${"/#JobOffers"}`
+            }
+          >
+            <ScrollLink
+              spy={true}
+              activeClass={classNames(styles.active)}
+              className={classNames(styles.navItem)}
+              to={
+                router.route === "/kampus-it"
+                  ? `${"/kampus-it/#ChooseYourTeam"}`
+                  : `${"JobOffers"}`
               }
             >
-              <div></div>
-            </div>
-          </div>
+              <button
+                aria-label="aplikuj"
+                className={classNames(styles.btn)}
+                style={{
+                  marginTop: "20px",
+                  marginRight: "10px",
+                }}
+              >
+                aplikuj
+              </button>
+            </ScrollLink>
+          </Link>
         </nav>
       </div>
       {isMobileNavbar ? (

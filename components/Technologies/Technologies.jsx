@@ -32,7 +32,7 @@ const Technologies = () => {
 
   return (
     <section
-      id="Technologies"
+      id="InteractiveMovie"
       style={{ backgroundColor: "red !important" }}
       className={classNames(styles.technologiesHolder, styles.darkSection)}
     >

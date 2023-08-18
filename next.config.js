@@ -6,9 +6,6 @@ const securityHeaders = [
 ];
 
 module.exports = {
-  output: {
-    hashFunction: "xxhash64",
-  },
   env: {
     space: "13pxfxm4n20r",
     accessToken: "cemO2FLOA11kReZLDC9A81Auo9J6MgIvSRxaf8gNmzs",
