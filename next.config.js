@@ -1,29 +1,32 @@
 const securityHeaders = [
   {
-    key: 'Strict-Transport-Security',
-    value: 'max-age=63072000; includeSubDomains; preload',
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
   },
 ];
 
 module.exports = {
+  output: {
+    hashFunction: "xxhash64",
+  },
   env: {
-    space: '13pxfxm4n20r',
-    accessToken: 'cemO2FLOA11kReZLDC9A81Auo9J6MgIvSRxaf8gNmzs',
+    space: "13pxfxm4n20r",
+    accessToken: "cemO2FLOA11kReZLDC9A81Auo9J6MgIvSRxaf8gNmzs",
   },
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: {
-    loader: 'imgix',
-    path: '',
+    loader: "imgix",
+    path: "",
   },
   trailingSlash: true,
   async headers() {
     return [
       {
         // Apply these headers to all routes in your application.
-        source: '/(.*)',
+        source: "/(.*)",
         headers: securityHeaders,
       },
     ];
