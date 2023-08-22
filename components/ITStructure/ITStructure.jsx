@@ -51,7 +51,7 @@ const ITStructure = () => {
         <img
           style={{ width: "100%" }}
           src="/wartosci.svg"
-          alt="Nasze wartości to autentyczność, empatia, odwaga, odpowiedzialność i współpraca."
+          alt="Na środku grafiki jest otwarty laptop, po jego prawej stronie leżą dwie zamknięte książki, po lewej stronie jest kubek. Wokół laptopa, na linii koła, wymienione się wartości mBanku wraz z opisami : Autentyczność: znaj swoje mocne strony i talenty, staraj się być najlepszą wersją siebie, szanuj i doceniaj różnice między ludźmi; Empatia: traktuj innych z szacunkiem, wykazuj wrażliwość na potrzeby, opinie i emocje członków zespołu, klientów i społeczeństwa; Odwaga: podejmuj odważne decyzje, w sposób otwarty wyrażaj swoje opinie, szanuj przy tym drugiego człowieka, mów wprost, miej w sobie gotowość, by przyznać się do błędów, wyciągaj z nich wnioski i traktuj jako naturalną drogę do tego, by odkryć nowe możliwości; Odpowiedzialność: w codziennej pracy patrz na kontekst całego banku, pamiętaj, że jesteś ważną częścią większej całości, zachowuj się etycznie i odpowiedzialnie, dotrzymuj danego słowa, dbaj o środowisko, w którym żyjesz, otwórz się na wrażliwość społeczną; Współpraca: okazuj otwartość na współpracę, zakładaj, że inni mają dobre intencje, bierz pod uwagę inne punkty widzenia i opinie, szukaj najlepszych sposobów osiągania wspólnych celów."
         />
 
         <a

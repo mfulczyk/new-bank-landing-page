@@ -28,7 +28,6 @@ const Navbar = () => {
           </Link>
 
           <a
-            activeClass={classNames(styles.active)}
             className={classNames(styles.navItem)}
             href="https://www.mbank.pl/kariera/wyszukiwarka-ofert/"
             target="_blank"
