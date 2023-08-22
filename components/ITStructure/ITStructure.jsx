@@ -54,7 +54,11 @@ const ITStructure = () => {
           alt="Nasze wartości to autentyczność, empatia, odwaga, odpowiedzialność i współpraca."
         />
 
-        <a passhref="true" href="/#JobOffers">
+        <a
+          passhref="true"
+          target="_blank"
+          href="https://www.mbank.pl/kariera/wyszukiwarka-ofert/"
+        >
           <button
             style={{ marginBottom: "40px" }}
             className={classNames(styles.btn)}

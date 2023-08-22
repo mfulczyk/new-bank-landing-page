@@ -27,29 +27,16 @@ const Navbar = () => {
             />
           </Link>
 
-          <Link
-            passHref
-            href={
-              router.route === "/kampus-it"
-                ? `${"/kampus-it/#ChooseYourTeam"}`
-                : `${"/#JobOffers"}`
-            }
+          <a
+            activeClass={classNames(styles.active)}
+            className={classNames(styles.navItem)}
+            href="https://www.mbank.pl/kariera/wyszukiwarka-ofert/"
+            target="_blank"
           >
-            <ScrollLink
-              spy={true}
-              activeClass={classNames(styles.active)}
-              className={classNames(styles.navItem)}
-              to={
-                router.route === "/kampus-it"
-                  ? `${"/kampus-it/#ChooseYourTeam"}`
-                  : `${"JobOffers"}`
-              }
-            >
-              <button aria-label="aplikuj" className={classNames(styles.btn)}>
-                aplikuj
-              </button>
-            </ScrollLink>
-          </Link>
+            <button aria-label="aplikuj" className={classNames(styles.btn)}>
+              aplikuj
+            </button>
+          </a>
         </nav>
         <nav className={classNames(styles.navBarMobile)}>
           <Link passHref href="/">
@@ -68,21 +55,14 @@ const Navbar = () => {
 
           <Link
             passHref
-            href={
-              router.route === "/kampus-it"
-                ? `${"/kampus-it/#ChooseYourTeam"}`
-                : `${"/#JobOffers"}`
-            }
+            target="_blank"
+            href="https://www.mbank.pl/kariera/wyszukiwarka-ofert/"
           >
             <ScrollLink
               spy={true}
               activeClass={classNames(styles.active)}
               className={classNames(styles.navItem)}
-              to={
-                router.route === "/kampus-it"
-                  ? `${"/kampus-it/#ChooseYourTeam"}`
-                  : `${"JobOffers"}`
-              }
+              to="https://www.mbank.pl/kariera/wyszukiwarka-ofert/"
             >
               <button
                 aria-label="aplikuj"
