@@ -33,11 +33,17 @@ const Technologies = () => {
   return (
     <section
       id="InteractiveMovie"
-      style={{ backgroundColor: "red !important" }}
       className={classNames(styles.technologiesHolder, styles.darkSection)}
     >
       <div className={classNames(styles.main)}>
-        <div style={{ width: "100%", height: "500px" }}></div>
+        <iframe
+          width="100%"
+          height="800px"
+          src="https://tomek.testnvme.rzeszow.pl/meme/"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
     </section>
   );
