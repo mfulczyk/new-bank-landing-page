@@ -41,7 +41,7 @@ export default function Home() {
           j.async = true;
           j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
           f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TPQ59RN')
+        })(window, document, 'script', 'dataLayer', 'GTM-NQBJCX3')
         `,
           }}
         />
@@ -49,7 +49,7 @@ export default function Home() {
       <>
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-TPQ59RN"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NQBJCX3"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}

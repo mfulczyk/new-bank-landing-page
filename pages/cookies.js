@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 /* eslint-disable @next/next/no-sync-scripts */
-import Head from 'next/head';
-import React, { useEffect } from 'react';
-import Navbar from '../components/Navbar/Navbar';
-import styles from '../styles/Home.module.css';
+import Head from "next/head";
+import React, { useEffect } from "react";
+import Navbar from "../components/Navbar/Navbar";
+import styles from "../styles/Home.module.css";
 /* eslint-disable @next/next/no-sync-scripts */
 /* eslint-disable @next/next/next-script-for-ga */
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Cookies() {
   return (
@@ -31,17 +31,17 @@ export default function Cookies() {
           j.async = true;
           j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
           f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TPQ59RN')
+        })(window, document, 'script', 'dataLayer', 'GTM-NQBJCX3')
         `,
           }}
         />
       </Head>
       <noscript>
         <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-TPQ59RN"
+          src="https://www.googletagmanager.com/ns.html?id=GTM-NQBJCX3"
           height="0"
           width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
+          style={{ display: "none", visibility: "hidden" }}
         ></iframe>
       </noscript>
       <main className={styles.main}>
