@@ -39,7 +39,7 @@ const Technologies = () => {
         <iframe
           width="100%"
           height="800px"
-          src="http://www.karierawmbanku.pl/film"
+          src="https://www.karierawmbanku.pl/film"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
