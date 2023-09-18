@@ -39,7 +39,7 @@ const Technologies = () => {
         <iframe
           width="100%"
           height="800px"
-          src="https://tomek.testnvme.rzeszow.pl/meme/"
+          src="http://www.karierawmbanku.pl"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
