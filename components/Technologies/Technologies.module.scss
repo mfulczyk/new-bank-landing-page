@@ -13,6 +13,7 @@
 
 .main {
   @include main;
+  height: 685px;
 }
 
 .technologyDescription > b {
@@ -21,10 +22,6 @@
 
 .darkSection {
   @include darkSection;
-}
-
-.technologiesHolder {
-  padding-bottom: 30px;
 }
 
 .smallImgTechnology {
@@ -43,5 +40,20 @@
   }
   .main div p b {
     font-size: 20px;
+  }
+  .main {
+    max-height: 600px;
+  }
+}
+
+@media (max-width: 850px) {
+  .main {
+    max-height: calc(100vh - 200px);
+  }
+}
+
+@media (max-width: 650px) {
+  .main {
+    max-height: calc(100vw - 150px);
   }
 }

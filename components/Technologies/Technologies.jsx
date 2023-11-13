@@ -38,11 +38,11 @@ const Technologies = () => {
       <div className={classNames(styles.main)}>
         <iframe
           width="100%"
-          height="800px"
+          height="100%"
           src="https://www.karierawmbanku.pl/film"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          frameBorder="0"
+          allowFullScreen={true}
+          allow="fullscreen"
         ></iframe>
       </div>
     </section>

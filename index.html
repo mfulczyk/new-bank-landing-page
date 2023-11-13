@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello, world!</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
+    <link rel="icon" href="favicon.png" />
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/hls.js/latest/hls.js"></script>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  </head>
+  <body id="test">
+    <style>
+      #controls_overlay_container {
+        position: absolute;
+        width: 94%;
+        height: 22%;
+        bottom: 33px;
+        left: 0;
+        z-index: 5000;
+        display: none;
+        visibility: hidden;
+        margin: 0 3%;
+      }
+
+      #controls_overlay_container > button {
+        width: 31.333%;
+        height: 100%;
+        display: block;
+        float: left;
+        border: 0;
+        background: rgba(255, 255, 255, 0.01);
+        margin: 0 1%;
+        cursor: pointer;
+      }
+
+      #controls_overlay_container > button:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    </style>
+
+    <div id="player_holder" style="max-width: 1920px">
+      <div id="player_container">
+        <video
+          controls
+          crossorigin
+          playsinline
+          id="playerElement"
+          preload="metadata"
+        >
+          <!-- data-poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" -->
+          <!-- Video files -->
+          <source type="application/x-mpegURL" src="hls/master.m3u8" />
+        </video>
+        <div id="controls_overlay_container">
+          <button id="b1">&nbsp;</button>
+          <button id="b2">&nbsp;</button>
+          <button id="b3">&nbsp;</button>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <b>Aktualna scena:</b>
+    <br />
+    <div id="playInfo"></div>
+
+    <br />
+    <br />
+    <b>Skocz do:</b>
+    <br />
+    <div id="playSkip"></div>
+
+    <script>
+      /*
+        Autor: G-LABS
+        Licencja: zamknięta
+        Licencjobiorca: soho.creative z prawem transferu na rzecz mBank S.A.
+    */
+
+      var player,
+        quality = {
+          default: 1080,
+          options: [1080, 720],
+        };
+
+      // check for common mobile user agents
+      var isMobile =
+        navigator.userAgent.match(/Android/i) ||
+        navigator.userAgent.match(/webOS/i) ||
+        navigator.userAgent.match(/iPhone/i) ||
+        navigator.userAgent.match(/iPad/i) ||
+        navigator.userAgent.match(/iPod/i) ||
+        navigator.userAgent.match(/BlackBerry/i) ||
+        navigator.userAgent.match(/Windows Phone/i);
+
+      var PlayController = (function () {
+        var co = document.getElementById("controls_overlay_container");
+        const playerElement = document.getElementById("playerElement");
+        const playSkip = document.getElementById("playSkip");
+
+        function updateQuality(newQuality) {
+          window.hls.levels.forEach((level, levelIndex) => {
+            if (level.height === newQuality) {
+              console.log("Found quality match with " + newQuality);
+              window.hls.currentLevel = levelIndex;
+            }
+          });
+        }
+
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource("hls/master.m3u8");
+
+          hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+            const availableQualities = hls.levels
+              .map((l) => l.height)
+              .reverse();
+            quality = {
+              default: 1080,
+              options: availableQualities,
+              forced: true,
+              onChange: (e) => updateQuality(e),
+            };
+            initPlayer();
+          });
+
+          hls.attachMedia(playerElement);
+          window.hls = hls;
+        }
+
+        function recalcTime(timeString) {
+          var c = timeString.split(":");
+          if (c.length == 2) {
+            return parseInt(c[0]) + (parseInt(c[1]) * 4) / 100;
+          }
+
+          if (c.length == 3) {
+            return (
+              parseInt(c[0]) * 60 + parseInt(c[1]) + (parseInt(c[2]) * 4) / 100
+            );
+          }
+        }
+
+        var allPoints = [
+            {
+              type: "freePlayback",
+              name: "Intro",
+              startTime: "0:0",
+              endTime: "32:15",
+            },
+            /*
+                Wybór 1 			| 	32:16 - 42:09 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 1.3)
+                Odpowiedz 1.1 	| 	42:10 - 53:05 (ZŁA - POWRÓT DO Wyboru 1)
+                Odpowiedz 1.2 	| 	53:06 - 1:10:24 (ZŁA - POWRÓT DO Wyboru 1)
+                Odpowiedz 1.3 	| 	1:11:00 (DOBRA - IDZIEMY DALEJ)
+            */
+            {
+              type: "menu",
+              name: "Wybór 1",
+              startTime: "32:16",
+              endTime: "42:09",
+              noChoice: "1:11:02",
+              pressOne: { start: "42:10" },
+              pressTwo: { start: "53:08" },
+              pressThree: { start: "1:11:02" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 1.1",
+              startTime: "42:10",
+              endTime: "53:03",
+              skipTo: "32:16",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 1.2",
+              startTime: "53:06",
+              endTime: "1:10:22",
+              skipTo: "32:16",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 1.3",
+              startTime: "1:11:00",
+              endTime: "1:45:17",
+            },
+
+            /*
+                Wybór 2			|	1:45:18 - 1:55:10 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 2.3)
+                Odpowiedz 2.1 	| 	1:55:11 - 2:12:10 (ZŁA - POWRÓT DO Wyboru 2)
+                Odpowiedz 2.2 	| 	2:12:11 - 2:24:23 (ZŁA - POWRÓT DO Wyboru 2)
+                Odpowiedz 2.3 	| 	2:24:24 (DOBRA - IDZIEMY DALEJ)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 2",
+              startTime: "1:45:18",
+              endTime: "1:55:10",
+              noChoice: "2:24:26",
+              pressOne: { start: "1:55:11" },
+              pressTwo: { start: "2:12:13" },
+              pressThree: { start: "2:24:26" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 2.1",
+              startTime: "1:55:11",
+              endTime: "2:12:08",
+              skipTo: "1:45:18",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 2.2",
+              startTime: "2:12:11",
+              endTime: "2:24:21",
+              skipTo: "1:45:18",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 1.3",
+              startTime: "2:24:24",
+              endTime: "2:53:18",
+            },
+
+            /*
+                Wybór 3			|	2:53:19 - 3:03:10 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 3.3)
+                Odpowiedz 3.1 	| 	3:03:11 - 3:17:20 (ZŁA - POWRÓT DO Wyboru 3)
+                Odpowiedz 3.2 	| 	3:17:21 - 3:30:24 (ZŁA - POWRÓT DO Wyboru 3)
+                Odpowiedz 3.3 	| 	3:31:00 (DOBRA - IDZIEMY DALEJ)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 3",
+              startTime: "2:53:19",
+              endTime: "3:03:10 ",
+              noChoice: "3:31:02",
+              pressOne: { start: "3:03:11" },
+              pressTwo: { start: "3:17:23" },
+              pressThree: { start: "3:31:02" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 3.1",
+              startTime: "3:03:11",
+              endTime: "3:17:20",
+              skipTo: "2:53:19",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 3.2",
+              startTime: "3:17:21",
+              endTime: "3:30:24",
+              skipTo: "2:53:19",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 3.3",
+              startTime: "3:31:00",
+              endTime: "3:54:19",
+            },
+
+            /*
+                Wybór 4			|	3:54:20 - 4:04:12 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 4.3)
+                Odpowiedz 4.1 	| 	4:04:13 - 4:13:11 (ZŁA - POWRÓT DO Wyboru 4)
+                Odpowiedz 4.2 	| 	4:13:12 (DOBRA - IDZIEMY DALEJ DO Wyboru 5A)
+                Odpowiedz 4.3 	| 	4:53:23 (DOBRA - IDZIEMY DALEJ DO Wyboru 5B)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 4",
+              startTime: "3:54:20",
+              endTime: "4:04:12",
+              noChoice: "4:53:25",
+              pressOne: { start: "4:04:13" },
+              pressTwo: { start: "4:13:14" },
+              pressThree: { start: "4:53:25" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 4.1",
+              startTime: "4:04:13",
+              endTime: "4:13:09",
+              skipTo: "3:54:20",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 4.2",
+              startTime: "4:13:12",
+              endTime: "4:44:06", //koniec tej sceny
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 4.3",
+              startTime: "4:53:23",
+              endTime: "5:25:03",
+            },
+
+            /*
+                Wybór 5A		|	4:44:07 - 4:53:22 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 5.2)
+                Wybór 5B		|	5:25:04 - 5:34:19 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 5.3)
+                Odpowiedz 5.1 	| 	5:34:20 - 5:43:13 (ZŁA - POWRÓT DO Wyboru 5B)
+                Odpowiedz 5.2 	| 	5:43:14 (DOBRA - IDZIEMY DALEJ DO Wyboru 6A)
+                Odpowiedz 5.3 	| 	6:31:03 (DOBRA - IDZIEMY DALEJ DO Wyboru 6B)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 5A",
+              startTime: "4:44:07",
+              endTime: "4:53:22",
+              noChoice: "5:43:18",
+              pressOne: { start: "5:34:20" },
+              pressTwo: { start: "5:43:18" },
+              pressThree: { start: "6:31:05" },
+            },
+            {
+              type: "menu",
+              name: "Wybór 5B",
+              startTime: "5:25:04",
+              endTime: "5:34:19",
+              noChoice: "6:31:05",
+              pressOne: { start: "5:34:20" },
+              pressTwo: { start: "5:43:18" },
+              pressThree: { start: "6:31:05" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 5.1",
+              startTime: "5:34:20",
+              endTime: "5:43:11",
+              skipTo: "5:25:04",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 5.2",
+              startTime: "5:43:14",
+              endTime: "6:21:12",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 5.3",
+              startTime: "6:31:03",
+              endTime: "7:02:23",
+            },
+
+            /*
+                Wybór 6A		|	6:21:13 - 6:31:02 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 6.2)
+                Wybór 6B		|	7:02:24 - 7:12:13 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 6.3)
+                Odpowiedz 6.1 	| 	7:12:14 - 7:22:08 (ZŁA - POWRÓT DO Wyboru 6B)
+                Odpowiedz 6.2 	| 	7:22:09 (DOBRA - IDZIEMY DALEJ DO Wyboru 7A)
+                Odpowiedz 6.3 	| 	7:56:20 (DOBRA - IDZIEMY DALEJ DO Wyboru 7B)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 6A",
+              startTime: "6:21:13",
+              endTime: "6:31:02",
+              noChoice: "7:22:11",
+              pressOne: { start: "7:12:16" },
+              pressTwo: { start: "7:22:13" },
+              pressThree: { start: "7:56:22" },
+            },
+            {
+              type: "menu",
+              name: "Wybór 6B",
+              startTime: "7:02:24",
+              endTime: "7:12:13",
+              noChoice: "7:56:22",
+              pressOne: { start: "7:12:16" },
+              pressTwo: { start: "7:22:13" },
+              pressThree: { start: "7:56:22" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 6.1",
+              startTime: "7:12:14",
+              endTime: "7:22:06",
+              skipTo: "7:02:24",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 6.2",
+              startTime: "7:22:09",
+              endTime: "7:47:03",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 6.3",
+              startTime: "7:56:20",
+              endTime: "8:18:10",
+            },
+
+            /*
+                Wybór 7A		|	7:47:04 - 7:56:19 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 7.2)
+                Wybór 7B		|	8:18:11 - 8:28:01 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 7.3)
+                Odpowiedz 7.1 	| 	8:28:02 - 8:57:05 (ZŁA - POWRÓT DO Wyboru 7B)
+                Odpowiedz 7.2 	| 	8:57:06 (DOBRA - IDZIEMY DALEJ DO Wyboru 8A)
+                Odpowiedz 7.3 	| 	9:36:00 (DOBRA - IDZIEMY DALEJ DO Wyboru 8B)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 7A",
+              startTime: "7:47:04",
+              endTime: "7:56:19",
+              noChoice: "8:57:08",
+              pressOne: { start: "8:28:04" },
+              pressTwo: { start: "8:57:08" },
+              pressThree: { start: "9:36:02" },
+            },
+            {
+              type: "menu",
+              name: "Wybór 7B",
+              startTime: "8:18:11",
+              endTime: "8:28:01",
+              noChoice: "9:36:02",
+              pressOne: { start: "8:28:04" },
+              pressTwo: { start: "8:57:08" },
+              pressThree: { start: "9:36:02" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 7.1",
+              startTime: "8:28:02",
+              endTime: "8:57:03",
+              skipTo: "8:18:11",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 7.2",
+              startTime: "8:57:06",
+              endTime: "9:26:07",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 7.3",
+              startTime: "9:36:00",
+              endTime: "10:08:10",
+            },
+
+            /*
+                Wybór 8A		|	9:26:08 - 9:35:24 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 8.2)
+                Wybór 8B		|	10:08:11 - 10:18:02 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 8.3)
+                Odpowiedz 8.1 	| 	10:18:03 - 10:26:06 (ZŁA - POWRÓT DO Wyboru 8B)
+                Odpowiedz 8.2 	| 	10:26:07 (DOBRA - IDZIEMY DALEJ DO Wyboru 9A)
+                Odpowiedz 8.3 	| 	11:29:04 (DOBRA - IDZIEMY DALEJ DO Wyboru 9B)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 8A",
+              startTime: "9:26:08",
+              endTime: "9:35:24",
+              noChoice: "10:26:09",
+              pressOne: { start: "10:18:07" },
+              pressTwo: { start: "10:26:09" },
+              pressThree: { start: "11:29:08" },
+            },
+            {
+              type: "menu",
+              name: "Wybór 8B",
+              startTime: "10:08:11",
+              endTime: "10:18:02",
+              noChoice: "11:29:08",
+              pressOne: { start: "10:18:07" },
+              pressTwo: { start: "10:26:09" },
+              pressThree: { start: "11:29:08" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 8.1",
+              startTime: "10:18:03",
+              endTime: "10:26:06",
+              skipTo: "10:08:11",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 8.2",
+              startTime: "10:26:07",
+              endTime: "11:19:10",
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 7.3",
+              startTime: "11:29:04",
+              endTime: "12:52:06",
+            },
+
+            /*
+                Wybór 9A		|	11:19:11 - 11:29:03 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 9.3)
+                Wybór 9B		|	12:52:07 - 13:01:24 (W PRZYPADKU BRAKU ODPOWIEDZI SKOCZ DO Odpowiedzi 9.3)
+                Odpowiedz 9.1 	| 	13:02:00 - 13:22:13 (ZŁA - POWRÓT DO Wyboru 9B)
+                Odpowiedz 9.2 	| 	13:22:14 (DOBRA - IDZIEMY DALEJ - NA 14:19:00 STOP)
+                Odpowiedz 9.3 	| 	14:19:06 (DOBRA - IDZIEMY DALEJ - DO KOŃCA FILMU)
+            */
+
+            {
+              type: "menu",
+              name: "Wybór 9A",
+              startTime: "11:19:11",
+              endTime: "11:29:03",
+              noChoice: "14:19:08",
+              pressOne: { start: "13:02:00" },
+              pressTwo: { start: "13:22:16" },
+              pressThree: { start: "14:19:08" },
+            },
+            {
+              type: "menu",
+              name: "Wybór 9B",
+              startTime: "12:52:07",
+              endTime: "13:01:24",
+              noChoice: "14:19:08",
+              pressOne: { start: "13:02:00" },
+              pressTwo: { start: "13:22:16" },
+              pressThree: { start: "14:19:08" },
+            },
+            {
+              type: "choiceScene",
+              name: "Odpowiedz 9.1",
+              startTime: "13:02:00",
+              endTime: "13:22:11",
+              skipTo: "12:52:07",
+            },
+            {
+              type: "endScene",
+              name: "Odpowiedz 9.2",
+              startTime: "13:22:14",
+              endTime: "14:19:00",
+            },
+            {
+              type: "endScene",
+              name: "Odpowiedz 9.3",
+              startTime: "14:19:06",
+              endTime: "15:11:00",
+            },
+          ],
+          selectorVisible = false,
+          poolInterval = null,
+          debug = true,
+          currentScene = null,
+          currentPlayPoint = null,
+          playStart,
+          playEnd,
+          wrongMode = false,
+          buttonClickedTimeout = false;
+
+        var handleUserEvent = function (playPoint) {
+          hideCo();
+          currentPlayPoint = playPoint;
+          player.currentTime = recalcTime(playPoint.start);
+          buttonClickedTimeout = true;
+
+          setTimeout(function () {
+            buttonClickedTimeout = false;
+          }, 5000);
+        }.bind(this);
+
+        var pressButton = function (buttonValue) {
+          debug && console.log("Pressed", buttonValue);
+
+          switch (buttonValue) {
+            case 1:
+              handleUserEvent(currentScene.pressOne);
+              break;
+
+            case 2:
+              handleUserEvent(currentScene.pressTwo);
+              break;
+
+            case 3:
+              handleUserEvent(currentScene.pressThree);
+              break;
+          }
+        }.bind(this);
+
+        var pressOneHandler = function () {
+          pressButton(1);
+        }.bind(this);
+
+        document
+          .getElementById("b1")
+          .addEventListener(isMobile ? "touchstart" : "click", pressOneHandler);
+
+        var pressTwoHandler = function () {
+          pressButton(2);
+        }.bind(this);
+
+        document
+          .getElementById("b2")
+          .addEventListener(isMobile ? "touchstart" : "click", pressTwoHandler);
+
+        var pressThreeHandler = function () {
+          pressButton(3);
+        }.bind(this);
+
+        document
+          .getElementById("b3")
+          .addEventListener(
+            isMobile ? "touchstart" : "click",
+            pressThreeHandler
+          );
+
+        var showCo = function () {
+          co.style.display = "initial";
+          co.style.visibility = "visible";
+          selectorVisible = true;
+        }.bind(this);
+
+        var hideCo = function () {
+          co.style.display = "none";
+          co.style.visibility = "hidden";
+          selectorVisible = false;
+        }.bind(this);
+
+        var injectControls = function (playerInstance) {
+          playerInstance.elements.container.style.position = "relative";
+          playerInstance.elements.container.append(co);
+        }.bind(this);
+
+        var startPooler = function () {
+          if (!poolInterval) {
+            poolInterval = setInterval(controlPlaybackTime, 1);
+          }
+        }.bind(this);
+
+        var stopPooler = function () {
+          clearInterval(poolInterval);
+          poolInterval = null;
+        }.bind(this);
+
+        var controlPlaybackTime = function () {
+          var currenttime = player.currentTime;
+
+          for (var i = 0; i < allPoints.length; i++) {
+            var scene = allPoints[i];
+
+            if (
+              currenttime >= recalcTime(scene.startTime) &&
+              currenttime <= recalcTime(scene.endTime)
+            )
+              if (currentScene != scene) {
+                currentScene = scene;
+                debug && console.log("Current Scene", scene);
+                document.getElementById("playInfo").innerHTML = [
+                  "Nazwa: ",
+                  scene.name,
+                  "start: ",
+                  scene.startTime,
+                  "koniec: ",
+                  scene.endTime,
+                ].join(" ");
+              } else continue;
+          }
+
+          if (!currentScene) {
+            return;
+          }
+
+          var endTime = recalcTime(currentScene.endTime);
+
+          switch (currentScene.type) {
+            case "freePlayback":
+              hideCo();
+              break;
+
+            case "menu":
+              if (buttonClickedTimeout) return;
+
+              showCo();
+              if (currenttime > endTime - 0.2 || currenttime == endTime)
+                player.currentTime = recalcTime(currentScene.noChoice);
+              break;
+
+            case "choiceScene":
+              hideCo();
+              if (!currentScene.skipTo) return;
+
+              if (currenttime > endTime - 0.2 || currenttime == endTime)
+                if (currentScene.skipTo)
+                  player.currentTime = recalcTime(currentScene.skipTo);
+              break;
+
+            case "endScene":
+              hideCo();
+              if (currenttime > endTime - 0.2 || currenttime == endTime)
+                player.pause();
+              break;
+          }
+        }.bind(this);
+
+        var attachToPlayer = function () {
+          debug && console.log("attachToPlayer FIRED", arguments);
+          debug && console.log("player INSTANCE", player);
+
+          if (!Hls.isSupported())
+            player.source = {
+              type: "video",
+              sources: [
+                {
+                  src: "1080p/mBank_x264.mp4",
+                  type: 'video/mp4; codecs="avc1"',
+                  size: 1080,
+                },
+                {
+                  src: "720p/mBank_x264.mp4",
+                  type: 'video/mp4; codecs="avc1"',
+                  size: 720,
+                },
+                {
+                  src: "1080p/mBank_hevc.mp4",
+                  type: 'video/mp4; codecs="hev1"',
+                  size: 1080,
+                },
+                {
+                  src: "720p/mBank_hevc.mp4",
+                  type: 'video/mp4; codecs="hev1"',
+                  size: 720,
+                },
+                {
+                  src: "1080p/mBank.webm",
+                  type: 'video/webm; codecs="vp9"',
+                  size: 1080,
+                },
+                {
+                  src: "720p/mBank.webm",
+                  type: 'video/webm; codecs="vp9"',
+                  size: 720,
+                },
+              ],
+            };
+
+          injectControls(player);
+          player.on("playing", startPooler);
+          player.on("pause", stopPooler);
+        }.bind(this);
+
+        var skipTo = function (skipPoint) {
+          player.currentTime = recalcTime(skipPoint.startTime);
+          return;
+        };
+
+        var showplaySkip = function () {
+          allPoints.forEach(function (pointInfo) {
+            btn = document.createElement("button");
+            btn.innerHTML = pointInfo.name;
+            btn.style.marginRight = "5px";
+
+            btn.addEventListener("click", function () {
+              skipTo(pointInfo);
+            });
+
+            playSkip.append(btn);
+          });
+        }.bind(this);
+
+        return {
+          attachToPlayer: attachToPlayer,
+          showplaySkip: showplaySkip,
+        };
+      })();
+
+      function initPlayer() {
+        player = new Plyr("#playerElement", {
+          debug: false,
+          controls: [
+            "play-large",
+            "play",
+            "mute",
+            "volume",
+            "fullscreen",
+            "settings",
+          ],
+          keyboard: {
+            global: true,
+          },
+          tooltips: {
+            controls: true,
+          },
+          captions: {
+            active: false,
+          },
+          settings: ["quality"],
+          i18n: {
+            quality: "Zmień jakość filmu",
+            settings: "Ustawienia",
+            play: "Start",
+            pause: "Pauza",
+            volume: "Głośność",
+            mute: "Wyłącz dźwięk",
+            unmute: "Włącz dżwięk",
+            qualityBadge: {
+              1080: "FHD",
+              720: "HD",
+              480: "SD",
+            },
+          },
+          quality: quality,
+        });
+
+        player.once("ready", PlayController.attachToPlayer);
+      }
+
+      !Hls.isSupported() && initPlayer();
+      PlayController.showplaySkip();
+    </script>
+    <!-- <script>
+      var username = prompt("Enter your username:");
+      var password = prompt("Enter your password:");
+
+      // Check if username and password are correct (for demo purposes)
+      if (username === "demo" && password === "demolinkleaders") {
+        alert("Login successful!");
+      } else {
+        var test = document.getElementById("test");
+        test.remove();
+        alert("Incorrect username or password. Please try again.");
+      }
+    </script> -->
+  </body>
+</html>

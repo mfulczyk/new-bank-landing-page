@@ -16,7 +16,7 @@ const Hero = () => {
           autoplay
           playsinline
           alt="film mBank - Weź udział w zabawie"
-          src="hero-movie-test.mp4"
+          src="hero-movie-new.mp4"
           class="${classNames(styles.video)}"
         />,
       `,
@@ -31,7 +31,7 @@ const Hero = () => {
           autoplay
           playsinline
           alt="film mBank - Weź udział w zabawie"
-          src="hero-movie-test-mobile.mp4"
+          src="hero-movie-new.mp4"
           class="${classNames(styles.videoMobile)}"
         />,
       `,
@@ -41,12 +41,12 @@ const Hero = () => {
         <div className={classNames(styles.headersHolder)}>
           <h3
             style={{ paddingTop: "70px", marginBottom: "20px" }}
-            aria-label="Weź udział w zabawie"
+            aria-label="poznaj nasze wartości"
           >
             poznaj nasze <br /> wartości
           </h3>
-          <h4 aria-label="dokonuj wyboru i poznaj wartości mBanku!">
-            - sprawdź czy do siebie pasujemy!
+          <h4 aria-label="- sprawdź czy do siebie pasujemy!">
+            - sprawdź, czy do siebie pasujemy!
           </h4>
           <Link passHref href="#InteractiveMovie">
             <button className={classNames(styles.btn)} aria-label="otwórz film">

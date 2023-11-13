@@ -6,14 +6,7 @@ import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar/Navbar";
 import Hero from "../components/Hero/Hero";
 import Technologies from "../components/Technologies/Technologies";
-import Agile from "../components/Agile/Agile";
 import ITStructure from "../components/ITStructure/ITStructure";
-import EmployeeReview from "../components/EmployeeReview/EmployeeReview";
-import Benefits from "../components/Benefits/Benefits";
-import RecrutationProcess from "../components/RecrutationProcess/RecrutationProcess";
-import JobOffers from "../components/JobOffers/JobOffers";
-import JobOffersFromCms from "../components/JobOffers/JobOffersFromCms";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -41,7 +34,7 @@ export default function Home() {
           j.async = true;
           j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
           f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-NQBJCX3')
+        })(window, document, 'script', 'dataLayer', 'GTM-TPQ59RN')
         `,
           }}
         />
@@ -49,7 +42,7 @@ export default function Home() {
       <>
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-NQBJCX3"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-TPQ59RN"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
